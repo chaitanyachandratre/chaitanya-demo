@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="mr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorkFlow Onboarding Popup</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="v1.css">
+</head>
+
+<body>
+
+    <div class="video-container">
+        <video id="onboardingVideo" controls>
+            <source src="v1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <button id="openPopupBtn" class="trigger-btn" style="display: none;">Start Onboarding</button>
+    </div>
+
+    <div class="popup-overlay" id="popupOverlay">
+
+        <div class="popup-container step-popup" id="popup1">
+            <div class="popup-left">
+                <div class="step-badge anim-element-1">1</div>
+                <h2 class="section-title anim-element-1">Welcome</h2>
+                <div class="brand-logo anim-element-1">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                            fill="#6344E3" opacity="0.2" />
+                        <path
+                            d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z"
+                            fill="#6344E3" />
+                    </svg>
+                    <span>WorkFlow</span>
+                </div>
+                <h1 class="main-heading anim-element-1">Welcome Aboard! <span class="rocket">🚀</span></h1>
+                <p class="description anim-element-1">We're excited to have you with us. This onboarding will help you
+                    get started with everything you need.</p>
+                <button class="primary-btn next-btn anim-element-1" data-next="2">
+                    Start Onboarding <i class="fa-solid fa-arrow-right"></i>
+                </button>
+                <div class="pagination-dots anim-element-1">
+                    <span class="dot active"></span><span class="dot"></span><span class="dot"></span><span
+                        class="dot"></span><span class="dot"></span><span class="dot"></span>
+                </div>
+            </div>
+            <div class="popup-right anim-element-1">
+                <img src="https://illustrations.popsy.co/purple/success.svg" alt="Welcome" class="illustration-img">
+            </div>
+        </div>
+
+        <div class="popup-container step-popup" id="popup2" style="display: none; opacity: 0;">
+            <div class="popup-left">
+                <div class="step-badge anim-element-2">2</div>
+                <h2 class="section-title anim-element-2">Setup Profile</h2>
+                <h1 class="main-heading anim-element-2">Let's build your profile! 🛠️</h1>
+                <p class="description anim-element-2">Add your personal and professional details to customize your
+                    entire workspace experience.</p>
+                <button class="primary-btn next-btn anim-element-2" data-next="3">
+                    Next Step <i class="fa-solid fa-arrow-right"></i>
+                </button>
+                <div class="pagination-dots anim-element-2">
+                    <span class="dot"></span><span class="dot active"></span><span class="dot"></span><span
+                        class="dot"></span><span class="dot"></span><span class="dot"></span>
+                </div>
+            </div>
+            <div class="popup-right anim-element-2">
+                <img src="https://illustrations.popsy.co/purple/student-going-to-school.svg" alt="Profile"
+                    class="illustration-img">
+            </div>
+        </div>
+
+        <div class="popup-container step-popup" id="popup3" style="display: none; opacity: 0;">
+            <div class="popup-left">
+                <div class="step-badge anim-element-3">3</div>
+                <h2 class="section-title anim-element-3">Document Upload</h2>
+                <h1 class="main-heading anim-element-3">Secure Document Vault 📂</h1>
+                <p class="description anim-element-3">Upload your verification and joining documents safely to our
+                    encrypted cloud manager.</p>
+                <button class="primary-btn next-btn anim-element-3" data-next="4">
+                    Next Step <i class="fa-solid fa-arrow-right"></i>
+                </button>
+                <div class="pagination-dots anim-element-3">
+                    <span class="dot"></span><span class="dot"></span><span class="dot active"></span><span
+                        class="dot"></span><span class="dot"></span><span class="dot"></span>
+                </div>
+            </div>
+            <div class="popup-right anim-element-3">
+                <img src="https://illustrations.popsy.co/purple/cloud-data-storage.svg" alt="Upload Documents"
+                    class="illustration-img">
+            </div>
+        </div>
+
+        <div class="popup-container step-popup" id="popup4" style="display: none; opacity: 0;">
+            <div class="popup-left">
+                <div class="step-badge anim-element-4">4</div>
+                <h2 class="section-title anim-element-4">Task Simulation</h2>
+                <h1 class="main-heading anim-element-4">Interactive Sandbox 🎯</h1>
+                <p class="description anim-element-4">Try out a live workflow simulation to understand your daily task
+                    assignments effortlessly.</p>
+                <button class="primary-btn next-btn anim-element-4" data-next="5">
+                    Next Step <i class="fa-solid fa-arrow-right"></i>
+                </button>
+                <div class="pagination-dots anim-element-4">
+                    <span class="dot"></span><span class="dot"></span><span class="dot"></span><span
+                        class="dot active"></span><span class="dot"></span><span class="dot"></span>
+                </div>
+            </div>
+            <div class="popup-right anim-element-4">
+                <img src="https://illustrations.popsy.co/purple/critical-thinking.svg" alt="Task Simulation"
+                    class="illustration-img">
+            </div>
+        </div>
+
+        <div class="popup-container step-popup" id="popup5" style="display: none; opacity: 0;">
+            <div class="popup-left">
+                <div class="step-badge anim-element-5">5</div>
+                <h2 class="section-title anim-element-5">Dashboard Tour</h2>
+                <h1 class="main-heading anim-element-5">Explore Analytics 📊</h1>
+                <p class="description anim-element-5">Get familiarized with your personalized analytics dashboard, track
+                    updates, metrics and KPIs.</p>
+                <button class="primary-btn next-btn anim-element-5" data-next="6">
+                    Finalize Onboarding <i class="fa-solid fa-arrow-right"></i>
+                </button>
+                <div class="pagination-dots anim-element-5">
+                    <span class="dot"></span><span class="dot"></span><span class="dot"></span><span
+                        class="dot"></span><span class="dot active"></span><span class="dot"></span>
+                </div>
+            </div>
+            <div class="popup-right anim-element-5">
+                <img src="https://illustrations.popsy.co/purple/web-navigation.svg" alt="Dashboard Tour"
+                    class="illustration-img">
+            </div>
+        </div>
+
+        <div class="popup-container final-popup-style" id="popup6" style="display: none; opacity: 0;">
+            <div class="final-content-wrapper">
+
+                <div class="success-checkmark-container anim-element-6">
+                    <div class="check-icon">
+                        <span class="icon-line line-tip"></span>
+                        <span class="icon-line line-long"></span>
+                        <div class="icon-circle"></div>
+                        <div class="icon-fix"></div>
+                    </div>
+                </div>
+
+                <h1 class="final-heading anim-element-6">You are all set!</h1>
+                <p class="final-subheading anim-element-6">Your customized workplace setup has been successfully
+                    completed.</p>
+                <p class="final-desc anim-element-6">You can now explore your personalized platform and start
+                    collaborating with your team.</p>
+                <button id="dashboardRedirectBtn" class="final-start-btn anim-element-6">Start</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="v1.js"></script>
+</body>
+
+</html>

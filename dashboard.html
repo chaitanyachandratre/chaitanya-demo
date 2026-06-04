@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorkFlow System - Interactive Demo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="i2.css">
+</head>
+
+<body>
+
+    <!-- VIRTUAL TOUR GUIDE OVERLAY CARD -->
+    <div class="tour-guide-card" id="tourCard">
+        <div class="tour-header">
+            <span><i class="fa-solid fa-wand-magic-sparkles"></i> Quick App Tour (<span
+                    id="tourStepNum">1</span>/7)</span>
+            <button id="skipTourBtn" class="tour-skip-btn">Skip</button>
+        </div>
+        <div class="tour-body">
+            <h4 id="tourTitle">Welcome to Dashboard</h4>
+            <p id="tourDesc">This is your main control panel. Here you can track pending tasks, unread messages, and
+                onboarding progress at a glance.</p>
+        </div>
+        <div class="tour-footer">
+            <button id="prevTourBtn" class="tour-btn outline" style="display:none;">Previous</button>
+            <button id="nextTourBtn" class="tour-btn solid">Next Step <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+    </div>
+
+    <div class="app-window">
+        <!-- FIXED SIDEBAR -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon-box"><i class="fa-solid fa-m"></i></div>
+                <span>WorkFlow</span>
+            </div>
+            <nav class="nav-menu">
+                <button class="nav-item active" data-target="dashboard" id="nav-dashboard"><i
+                        class="fa-solid fa-border-all"></i> Dashboard</button>
+                <button class="nav-item" data-target="tasks" id="nav-tasks"><i class="fa-regular fa-square-check"></i>
+                    My Tasks</button>
+                <button class="nav-item" data-target="calendar" id="nav-calendar"><i class="fa-regular fa-calendar"></i>
+                    Calendar</button>
+                <button class="nav-item" data-target="messages" id="nav-messages"><i class="fa-regular fa-comment"></i>
+                    Messages</button>
+                <button class="nav-item" data-target="documents" id="nav-documents"><i
+                        class="fa-regular fa-file-lines"></i> Documents</button>
+                <button class="nav-item" data-target="reports" id="nav-reports"><i class="fa-solid fa-chart-simple"></i>
+                    Reports</button>
+                <button class="nav-item" data-target="settings" id="nav-settings"><i class="fa-solid fa-sliders"></i>
+                    Settings</button>
+            </nav>
+        </aside>
+
+        <!-- CONTENT PANEL -->
+        <main class="content-area">
+
+            <!-- 1. DASHBOARD VIEW -->
+            <div class="view-panel active" id="view-dashboard">
+                <div class="view-header anim-el">
+                    <div>
+                        <h1 class="main-title">Welcome, Alex 👋</h1>
+                        <p class="sub-title">Here's what's happening today.</p>
+                    </div>
+                    <div class="header-profile">
+                        <div class="noti-bell"><i class="fa-regular fa-bell"></i><span class="badge-count">3</span>
+                        </div>
+                        <img src="https://i.pravatar.cc/100?img=12" alt="Alex" class="user-avatar">
+                        <span class="user-name">Alex <i class="fa-solid fa-chevron-down"></i></span>
+                    </div>
+                </div>
+
+                <div class="dash-grid anim-el">
+                    <div class="dash-card">
+                        <div class="card-top"><span>My Tasks</span> <i class="fa-regular fa-file-lines icon-blue"></i>
+                        </div>
+                        <h2 class="counter-num" data-val="12">0</h2>
+                        <p class="card-footer">Pending tasks</p>
+                    </div>
+                    <div class="dash-card">
+                        <div class="card-top"><span>Team Updates</span> <i class="fa-solid fa-users icon-purple"></i>
+                        </div>
+                        <h2 class="counter-num" data-val="8">0</h2>
+                        <p class="card-footer">New updates</p>
+                    </div>
+                    <div class="dash-card">
+                        <div class="card-top"><span>Messages</span> <i class="fa-regular fa-comment icon-pink"></i>
+                        </div>
+                        <h2 class="counter-num" data-val="5">0</h2>
+                        <p class="card-footer">Unread messages</p>
+                    </div>
+                    <div class="dash-card">
+                        <div class="card-top"><span>Documents</span> <i class="fa-regular fa-folder icon-orange"></i>
+                        </div>
+                        <h2 class="counter-num" data-val="7">0</h2>
+                        <p class="card-footer">Pending uploads</p>
+                    </div>
+                </div>
+
+                <div class="dash-bottom anim-el">
+                    <div class="section-card width-60">
+                        <h3 class="box-heading">📌 Upcoming</h3>
+                        <div class="event-row">
+                            <div class="ev-info"><i class="fa-regular fa-circle-dot purple"></i> Team Meeting</div>
+                            <div class="ev-time">10:00 AM <span class="tag-day">Today</span></div>
+                        </div>
+                        <div class="event-row">
+                            <div class="ev-info"><i class="fa-regular fa-circle-dot blue"></i> Project Review</div>
+                            <div class="ev-time">01:30 PM <span class="tag-day">Today</span></div>
+                        </div>
+                        <div class="event-row">
+                            <div class="ev-info"><i class="fa-regular fa-circle-dot orange"></i> Training Session</div>
+                            <div class="ev-time">03:00 PM <span class="tag-day gray">Tomorrow</span></div>
+                        </div>
+                    </div>
+                    <div class="section-card width-40">
+                        <h3 class="box-heading">Quick Access</h3>
+                        <div class="quick-grid">
+                            <div class="quick-item">
+                                <div class="q-icon green"><i class="fa-regular fa-calendar-plus"></i></div><span>Apply
+                                    Leave</span>
+                            </div>
+                            <div class="quick-item">
+                                <div class="q-icon blue"><i class="fa-regular fa-clipboard"></i></div><span>Submit
+                                    Report</span>
+                            </div>
+                            <div class="quick-item">
+                                <div class="q-icon purple"><i class="fa-solid fa-graduation-cap"></i></div>
+                                <span>Training</span>
+                            </div>
+                            <div class="quick-item">
+                                <div class="q-icon orange"><i class="fa-regular fa-life-ring"></i></div><span>Help
+                                    Center</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="onboarding-progress-bar anim-el">
+                    <div class="p-text"><span>Onboarding Progress</span> <span>60%</span></div>
+                    <div class="p-bg">
+                        <div class="p-fill" data-progress="60%"></div>
+                    </div>
+                    <p class="p-desc">Keep going! You're doing great.</p>
+                </div>
+            </div>
+
+            <!-- 2. MY TASKS VIEW -->
+            <div class="view-panel" id="view-tasks">
+                <div class="view-header anim-el">
+                    <div>
+                        <h1 class="main-title">My Tasks</h1>
+                        <p class="sub-title">Complete your pending tasks.</p>
+                    </div>
+                    <div class="progress-mini">
+                        <span>Overall Progress</span>
+                        <div class="mini-bar">
+                            <div class="mini-fill" data-progress="60%"></div>
+                        </div>
+                        <span class="bold">60%</span>
+                    </div>
+                </div>
+
+                <div class="task-tabs anim-el">
+                    <span class="t-tab active">Pending (4)</span>
+                    <span class="t-tab">In Progress (1)</span>
+                    <span class="t-tab">Completed (2)</span>
+                </div>
+
+                <div class="task-container anim-el">
+                    <div class="task-row">
+                        <div class="task-left-sec">
+                            <div class="t-icon-box"><i class="fa-regular fa-file-lines"></i></div>
+                            <div>
+                                <h4>Upload Documents</h4>
+                                <p>Upload required identity and address proof.</p>
+                            </div>
+                        </div>
+                        <div class="task-right-sec">
+                            <span class="status-badge high">High</span>
+                            <button class="action-btn outline">Upload</button>
+                        </div>
+                    </div>
+                    <div class="task-row">
+                        <div class="task-left-sec">
+                            <div class="t-icon-box pink"><i class="fa-regular fa-user"></i></div>
+                            <div>
+                                <h4>Complete Your Profile</h4>
+                                <p>Fill all details in your profile.</p>
+                            </div>
+                        </div>
+                        <div class="task-right-sec">
+                            <span class="status-badge high">High</span>
+                            <button class="action-btn outline">Go</button>
+                        </div>
+                    </div>
+                    <div class="task-row">
+                        <div class="task-left-sec">
+                            <div class="t-icon-box orange"><i class="fa-solid fa-graduation-cap"></i></div>
+                            <div>
+                                <h4>Finish Training</h4>
+                                <p>Complete the mandatory training modules.</p>
+                            </div>
+                        </div>
+                        <div class="task-right-sec">
+                            <span class="status-badge medium">Medium</span>
+                            <button class="action-btn solid">Continue</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. CALENDAR VIEW -->
+            <div class="view-panel" id="view-calendar">
+                <div class="view-header anim-el">
+                    <div>
+                        <h1 class="main-title">Upcoming Events</h1>
+                        <p class="sub-title">Your schedule at a glance.</p>
+                    </div>
+                    <div class="cal-actions">
+                        <button class="btn-today">Today</button>
+                        <button class="btn-arrow"><i class="fa-solid fa-chevron-left"></i></button>
+                        <button class="btn-arrow"><i class="fa-solid fa-chevron-right"></i></button>
+                    </div>
+                </div>
+
+                <div class="calendar-split anim-el">
+                    <div class="cal-left-box">
+                        <div class="cal-month-head">May 2026</div>
+                        <div class="cal-grid-header">
+                            <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+                        </div>
+                        <div class="cal-days">
+                            <span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>1</span><span>2</span>
+                            <span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
+                            <span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span>
+                            <span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span
+                                class="cal-active">22</span><span>23</span>
+                        </div>
+                    </div>
+                    <div class="cal-right-box">
+                        <div class="event-card-list">
+                            <div class="schedule-item current">
+                                <div>
+                                    <h4>Team Meeting</h4>
+                                    <p>10:00 AM - 11:00 AM</p>
+                                </div>
+                            </div>
+                            <div class="schedule-item">
+                                <div>
+                                    <h4>HR Orientation</h4>
+                                    <p>02:00 PM - 03:00 PM</p>
+                                </div>
+                            </div>
+                            <div class="schedule-item">
+                                <div>
+                                    <h4>Training Session</h4>
+                                    <p>05:00 PM - 06:00 PM</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. MESSAGES VIEW -->
+            <div class="view-panel" id="view-messages">
+                <div class="messages-layout anim-el">
+                    <div class="msg-sidebar">
+                        <div class="msg-search-box">
+                            <h3>Messages</h3>
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                        <div class="chat-list-wrapper">
+                            <div class="user-chat-row active">
+                                <img src="https://i.pravatar.cc/100?img=1" alt="HR">
+                                <div class="uc-info">
+                                    <h4>HR Team</h4>
+                                    <p>Welcome aboard! Please c...</p>
+                                </div>
+                                <span class="uc-badge">2</span>
+                            </div>
+                            <div class="user-chat-row">
+                                <img src="https://i.pravatar.cc/100?img=2" alt="IT">
+                                <div class="uc-info">
+                                    <h4>IT Support</h4>
+                                    <p>Your VPN setup has been...</p>
+                                </div>
+                                <span class="uc-badge blue">1</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="msg-chat-window">
+                        <div class="cw-header">
+                            <div class="cw-user"><img src="https://i.pravatar.cc/100?img=1" alt="HR">
+                                <div>
+                                    <h4>HR Team</h4><span>Online</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Chat message container for appended chat -->
+                        <div class="cw-body" id="chatBody">
+                            <div class="chat-bubble received">
+                                <p>Welcome aboard! Please complete your onboarding tasks.</p>
+                                <span class="chat-time">10:30 AM</span>
+                            </div>
+                            <div class="chat-bubble sent">
+                                <p>Thank you! I will complete them.</p>
+                                <span class="chat-time">10:31 AM <i
+                                        class="fa-solid fa-check-double text-blue"></i></span>
+                            </div>
+                        </div>
+                        <div class="cw-footer">
+                            <input type="text" id="chatInput"
+                                placeholder="Type a message and press enter or click send...">
+                            <button class="btn-send" id="chatSendBtn"><i class="fa-solid fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. DOCUMENTS VIEW -->
+            <div class="view-panel" id="view-documents">
+                <div class="view-header anim-el">
+                    <div>
+                        <h1 class="main-title">Upload Documents</h1>
+                        <p class="sub-title">Upload and manage your documents.</p>
+                    </div>
+                    <button class="primary-btn-sm blue-bg"><i class="fa-solid fa-plus"></i> Upload New</button>
+                </div>
+
+                <div class="table-container anim-el">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Document Name</th>
+                                <th>Status</th>
+                                <th>Uploaded On</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>PAN Card</td>
+                                <td><span class="badge yellow">Pending</span></td>
+                                <td>-</td>
+                                <td><button class="btn-table-upload">Upload</button></td>
+                            </tr>
+                            <tr>
+                                <td>Aadhar Card</td>
+                                <td><span class="badge yellow">Pending</span></td>
+                                <td>-</td>
+                                <td><button class="btn-table-upload">Upload</button></td>
+                            </tr>
+                            <tr>
+                                <td>Passport Size Photo</td>
+                                <td><span class="badge green">Uploaded</span></td>
+                                <td>20 May 2026</td>
+                                <td>
+                                    <div class="table-actions"><i class="fa-regular fa-eye"></i> <i
+                                            class="fa-solid fa-ellipsis"></i></div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 6. REPORTS VIEW -->
+            <div class="view-panel" id="view-reports">
+                <div class="view-header anim-el">
+                    <div>
+                        <h1 class="main-title">Reports</h1>
+                        <p class="sub-title">View your activity and performance.</p>
+                    </div>
+                    <button class="dropdown-period">This Month <i class="fa-solid fa-chevron-down"></i></button>
+                </div>
+
+                <div class="reports-main-grid anim-el">
+                    <div class="rep-card">
+                        <h3>Onboarding Progress</h3>
+                        <div class="rep-chart-container">
+                            <svg viewBox="0 0 36 36" class="circle-svg purple-chart">
+                                <path class="c-bg"
+                                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                <path class="c-fill" data-dash="60, 100" stroke-dasharray="0, 100"
+                                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            </svg>
+                            <div class="c-text"><span class="counter-num" data-val="60">0</span>%</div>
+                        </div>
+                        <p class="rep-footer">✨ 12 of 20 tasks completed</p>
+                    </div>
+
+                    <div class="rep-card">
+                        <h3>Training Completion</h3>
+                        <div class="rep-chart-container">
+                            <svg viewBox="0 0 36 36" class="circle-svg green-chart">
+                                <path class="c-bg"
+                                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                <path class="c-fill" data-dash="75, 100" stroke-dasharray="0, 100"
+                                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            </svg>
+                            <div class="c-text"><span class="counter-num" data-val="75">0</span>%</div>
+                        </div>
+                        <p class="rep-footer">✨ 3 of 4 modules completed</p>
+                    </div>
+
+                    <div class="rep-card">
+                        <h3>Attendance Summary</h3>
+                        <div class="bar-chart-mock">
+                            <div class="b-bar">
+                                <div class="b-fill" style="height: 80%"></div><span>Mon</span>
+                            </div>
+                            <div class="b-bar">
+                                <div class="b-fill" style="height: 95%"></div><span>Tue</span>
+                            </div>
+                            <div class="b-bar">
+                                <div class="b-fill" style="height: 60%"></div><span>Wed</span>
+                            </div>
+                            <div class="b-bar">
+                                <div class="b-fill" style="height: 85%"></div><span>Thu</span>
+                            </div>
+                            <div class="b-bar">
+                                <div class="b-fill" style="height: 90%"></div><span>Fri</span>
+                            </div>
+                        </div>
+                        <p class="rep-footer text-center">✅ 22 / 26 Days</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. SETTINGS VIEW -->
+            <div class="view-panel" id="view-settings">
+                <div class="view-header anim-el">
+                    <div>
+                        <h1 class="main-title">Settings</h1>
+                        <p class="sub-title">Manage your preferences and account.</p>
+                    </div>
+                </div>
+
+                <div class="settings-sub-tabs anim-el">
+                    <span class="sub-tab active">Profile Settings</span>
+                    <span class="sub-tab">Notification Preferences</span>
+                    <span class="sub-tab">Security</span>
+                    <span class="sub-tab">Language</span>
+                </div>
+
+                <div class="settings-layout-box anim-el">
+                    <div class="set-profile-row">
+                        <div class="set-avatar-wrapper">
+                            <img src="https://i.pravatar.cc/100?img=12" alt="Alex">
+                            <div class="camera-badge"><i class="fa-solid fa-camera"></i></div>
+                        </div>
+                        <div>
+                            <h3>Alex Johnson</h3>
+                            <p>Software Engineer</p>
+                            <span class="set-email-text">alex.johnson@company.com</span>
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group"><label>Full Name</label><input type="text" value="Alex Johnson"></div>
+                        <div class="form-group"><label>Department</label><input type="text" value="Engineering"></div>
+                        <div class="form-group"><label>Email</label><input type="email"
+                                value="alex.johnson@company.com"></div>
+                        <div class="form-group"><label>Employee ID</label><input type="text" value="EMP12345"></div>
+                        <div class="form-group"><label>Phone</label><input type="text" value="+91 98765 43210"></div>
+                        <div class="form-group"><label>Date of Joining</label><input type="text" value="15 May 2026">
+                        </div>
+                    </div>
+                    <button class="primary-btn-sm save-btn">Save Changes</button>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="i2.js"></script>
+</body>
+
+</html>
