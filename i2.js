@@ -1,7 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const navItems = document.querySelectorAll(
-    ".nav-item:not(.demo-restart-btn)",
-  );
+  const navItems = document.querySelectorAll(".nav-item");
   const viewPanels = document.querySelectorAll(".view-panel");
 
   // १. INITIAL PANEL OPEN ANIMATION
@@ -96,70 +94,49 @@ document.addEventListener("DOMContentLoaded", () => {
   const chatSendBtn = document.getElementById("chatSendBtn");
   const chatBody = document.getElementById("chatBody");
 
-  if (chatSendBtn && chatInput) {
-    function sendMessage() {
-      const msgText = chatInput.value.trim();
-      if (msgText === "") return;
+  function sendMessage() {
+    const msgText = chatInput.value.trim();
+    if (msgText === "") return;
 
-      const newBubble = document.createElement("div");
-      newBubble.classList.add("chat-bubble", "sent");
-      newBubble.style.opacity = 0;
+    // Create Chat Bubble Element dynamically
+    const newBubble = document.createElement("div");
+    newBubble.classList.add("chat-bubble", "sent");
+    newBubble.style.opacity = 0; // for GSAP entry
 
-      const now = new Date();
-      const timeString = now.toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
-      });
-
-      newBubble.innerHTML = `
-              <p>${msgText}</p>
-              <span class="chat-time">${timeString} <i class="fa-solid fa-check-double text-blue"></i></span>
-          `;
-
-      chatBody.appendChild(newBubble);
-      chatInput.value = "";
-
-      gsap.to(newBubble, {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.25,
-        ease: "back.out(1.5)",
-      });
-
-      chatBody.scrollTo({ top: chatBody.scrollHeight, behavior: "smooth" });
-    }
-
-    chatSendBtn.addEventListener("click", sendMessage);
-    chatInput.addEventListener("keypress", (e) => {
-      if (e.key === "Enter") sendMessage();
+    // Get current system time format
+    const now = new Date();
+    const timeString = now.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
     });
+
+    newBubble.innerHTML = `
+            <p>${msgText}</p>
+            <span class="chat-time">${timeString} <i class="fa-solid fa-check-double text-blue"></i></span>
+        `;
+
+    chatBody.appendChild(newBubble);
+    chatInput.value = ""; // clear input
+
+    // Smooth GSAP Entry Animation for message bubble
+    gsap.to(newBubble, {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      duration: 0.25,
+      ease: "back.out(1.5)",
+    });
+
+    // Auto Scroll to Bottom of Chat Window smoothly
+    chatBody.scrollTo({ top: chatBody.scrollHeight, behavior: "smooth" });
   }
 
-  // ४. NEW BUTTONS CLICK ROUTING LOGIC
-  const profileSetupBtn = document.getElementById("profileSetupBtn");
-  const taskSimulationBtn = document.getElementById("taskSimulationBtn");
-  const startDemoAgainBtn = document.getElementById("startDemoAgainBtn");
+  chatSendBtn.addEventListener("click", sendMessage);
+  chatInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") sendMessage();
+  });
 
-  if (profileSetupBtn) {
-    profileSetupBtn.addEventListener("click", () => {
-      window.location.href = "profilesetup.html";
-    });
-  }
-
-  if (taskSimulationBtn) {
-    taskSimulationBtn.addEventListener("click", () => {
-      window.location.href = "tasksimulation.html";
-    });
-  }
-
-  if (startDemoAgainBtn) {
-    startDemoAgainBtn.addEventListener("click", () => {
-      window.location.href = "v1.html";
-    });
-  }
-
-  // ५. INTERACTIVE VIRTUAL TOUR DIALOGUE DATA
+  // ४. INTERACTIVE VIRTUAL TOUR DIALOGUE DATA
   const tourSteps = [
     {
       target: "dashboard",
@@ -210,18 +187,22 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateTourCard() {
     const currentStep = tourSteps[currentTourIndex];
 
+    // Content Update
     tourStepNum.textContent = currentTourIndex + 1;
     tourTitle.textContent = currentStep.title;
     tourDesc.textContent = currentStep.desc;
 
+    // Auto Switch UI Screen to correspond with current step
     switchTab(currentStep.target);
 
+    // Manage Tour Action Buttons State Visibility
     prevTourBtn.style.display = currentTourIndex === 0 ? "none" : "block";
     nextTourBtn.innerHTML =
       currentTourIndex === tourSteps.length - 1
         ? "Finish Demo <i class='fa-solid fa-check'></i>"
         : "Next Step <i class='fa-solid fa-arrow-right'></i>";
 
+    // Pop-up bounce animation to draw attention to new step info
     gsap.fromTo(
       tourCard,
       { scale: 0.95 },
@@ -229,35 +210,34 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   }
 
-  if (tourCard) {
-    nextTourBtn.addEventListener("click", () => {
-      if (currentTourIndex < tourSteps.length - 1) {
-        currentTourIndex++;
-        updateTourCard();
-      } else {
-        gsap.to(tourCard, {
-          opacity: 0,
-          y: -20,
-          duration: 0.3,
-          onComplete: () => tourCard.remove(),
-        });
-      }
-    });
-
-    prevTourBtn.addEventListener("click", () => {
-      if (currentTourIndex > 0) {
-        currentTourIndex--;
-        updateTourCard();
-      }
-    });
-
-    skipTourBtn.addEventListener("click", () => {
+  nextTourBtn.addEventListener("click", () => {
+    if (currentTourIndex < tourSteps.length - 1) {
+      currentTourIndex++;
+      updateTourCard();
+    } else {
+      // Tour Finished Close
       gsap.to(tourCard, {
         opacity: 0,
         y: -20,
         duration: 0.3,
         onComplete: () => tourCard.remove(),
       });
+    }
+  });
+
+  prevTourBtn.addEventListener("click", () => {
+    if (currentTourIndex > 0) {
+      currentTourIndex--;
+      updateTourCard();
+    }
+  });
+
+  skipTourBtn.addEventListener("click", () => {
+    gsap.to(tourCard, {
+      opacity: 0,
+      y: -20,
+      duration: 0.3,
+      onComplete: () => tourCard.remove(),
     });
-  }
+  });
 });
